@@ -1,0 +1,7 @@
+if [[ -z "$RELEASE_DIR" ]]; then
+    # resolve path to release
+    OLD_DIR=$PWD
+    cd "$(dirname "$0")/.."
+    RELEASE_DIR=$(pwd -P)
+    cd $OLD_DIR
+fi

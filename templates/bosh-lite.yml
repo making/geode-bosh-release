@@ -1,0 +1,38 @@
+---
+
+director_uuid: PLACEHOLDER-DIRECTOR-UUID
+name: geode
+meta:
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: latest
+
+jobs:
+- name: geode-locator
+  instances: 1
+- name: geode-cacheserver
+  instances: 3
+
+resource_pools:
+  name: geode-locators
+  cloud_properties:
+    name: random
+
+  name: geode-cacheservers
+  cloud_properties:
+    name: random
+
+compilation:
+  workers: 2
+  cloud_properties:
+    name: random
+
+networks:
+- name: default
+  subnets:
+  - cloud_properties:
+      name: random
+    range: 10.244.5.0/24
+    gateway: 10.244.5.1
+    static:
+    - 10.244.5.2 - 10.244.5.42

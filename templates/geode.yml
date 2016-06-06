@@ -1,43 +1,33 @@
 ---
-name: geode-deployment
 
-director_uuid: 8d3e5fb9-d242-4757-9047-3bad6af24dec
+meta: (( merge ))
+name: (( merge ))
+director_uuid: (( merge ))
 
 releases:
 - {name: geode, version: latest}
 
 networks:
 - name: default
-  type: manual
-  subnets:
-  - range: 10.0.0.0/24
-    gateway: 10.0.0.1
-    reserved: [10.0.0.2-10.0.0.50]
-    cloud_properties: 
-      subnet: subnet-e0bbb7b9
+  subnets: (( merge ))
 
 resource_pools:
 - name: geode-locators
   network: default
-  stemcell:
-    name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
-    version: 3215
-  cloud_properties:
-    instance_type: r3.large
+  stemcell: (( meta.stemcell ))
+  cloud_properties: 
+    <<: (( merge ))
 
 - name: geode-cacheservers
   network: default
-  stemcell:
-    name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
-    version: 3215
-  cloud_properties:
-    instance_type: r3.large
+  stemcell: (( meta.stemcell ))
+  cloud_properties: 
+    <<: (( merge ))
 
 compilation:
   workers: 2
   network: default
-  cloud_properties:
-    instance_type: m3.medium
+  cloud_properties: (( merge ))
 
 update:
   canaries: 1
@@ -48,7 +38,7 @@ update:
 
 jobs:
 - name: geode-locator
-  instances: 2
+  instances: (( merge ))
   templates:
   - {name: locator, release: geode}
   consumes:
@@ -61,7 +51,7 @@ jobs:
   - name: default
 
 - name: geode-cacheserver
-  instances: 3
+  instances: (( merge ))
   templates:
   - {name: cacheserver, release: geode}
   consumes:

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -ex
+
+. "$(dirname "$0")/setenv"
+
+cd $RELEASE_DIR
+
+./scripts/make_manifest_spiff.sh templates/bosh-lite.yml "$@"
