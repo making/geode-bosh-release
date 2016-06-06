@@ -2,6 +2,8 @@
 
 RUN_DIR=/var/vcap/data/locator
 LOG_DIR=/var/vcap/sys/log/locator
+JOB_DIR=/var/vcap/jobs/locator/
+CONFIG_DIR=$JOB_DIR/config
 
 export JAVA_HOME=/var/vcap/packages/jdk8
 export GEODE_HOME=/var/vcap/packages/geode
@@ -15,6 +17,8 @@ case $1 in
     chown vcap:vcap ${RUN_DIR}
 
     chpst -u vcap:vcap gfsh start locator --name=`hostname` \
+      --J=-Djava.rmi.server.hostname=<%= spec.address %> \
+      --properties-file=$CONFIG_DIR/gemfire.properties \
       --dir=${RUN_DIR}                                      \
       --initial-heap=<%= p("locator.initial_heap") %>       \
       --max-heap=<%= p("locator.max_heap") %>               \

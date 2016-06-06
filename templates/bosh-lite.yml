@@ -32,7 +32,7 @@ networks:
   subnets:
   - cloud_properties:
       name: random
-    range: 10.244.5.0/24
-    gateway: 10.244.5.1
+    range: 10.244.0.0/24
+    gateway: 10.244.0.1
     static:
-    - 10.244.5.2 - 10.244.5.42
+    - 10.244.0.2 - 10.244.0.42
