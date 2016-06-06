@@ -26,6 +26,6 @@ case $1 in
     ;;
 
   stop)
-    gfsh stop locator --dir=${RUN_DIR}
+    killall java
     ;;
 esac
