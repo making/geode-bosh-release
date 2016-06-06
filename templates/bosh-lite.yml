@@ -14,11 +14,11 @@ jobs:
   instances: 3
 
 resource_pools:
-  name: geode-locators
+- name: geode-locators
   cloud_properties:
     name: random
 
-  name: geode-cacheservers
+- name: geode-cacheservers
   cloud_properties:
     name: random
 
