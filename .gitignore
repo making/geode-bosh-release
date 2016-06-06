@@ -1,0 +1,61 @@
+*.iml
+/*.ipr
+*.coverprofile
+/.idea
+/.blobs
+/.bundle
+/.cache
+/.dev_builds
+/blobs
+/config/private.yml
+/config/dev.yml
+/bin
+/pkg
+tmp/
+/src/version
+
+# ignore built tarballs that are uploaded to s3 from ci
+/releases/*.tgz
+/releases/**/*.tgz
+/dev_releases
+/.final_builds/jobs/**/*.tgz
+/.final_builds/packages/**/*.tgz
+
+# kafka goodies
+log-cleaner.log
+
+# Mac OSX
+.DS_Store
+._.DS_Store
+
+# go test binaries
+*.test
+
+# emacs
+*~
+/.dir-locals.el
+
+# Tools
+/src/code.google.com/p/go.tools
+/src/code.google.com/p/rog-go
+/src/github.com/nsf/gocode
+/src/github.com/dougm/goflymake
+/src/golang.org/x/tools
+/src/9fans.net/go
+/src/github.com/golang/lint
+/src/github.com/rogpeppe
+/src/github.com/alecthomas/
+/src/github.com/maxbrunsfeld/
+/src/gopkg.in/alecthomas/
+/src/github.com/davecgh/go-spew/
+/src/github.com/nelsam/hel
+/src/github.com/spf13/cobra
+/src/github.com/spf13/pflag
+/src/github.com/fatih/motion/
+/src/github.com/google/shlex
+/src/github.com/jstemmer/gotags
+/src/github.com/kisielk/errcheck
+/src/github.com/kisielk/gotool
+/src/github.com/klauspost/asmfmt
+/src/github.com/zmb3/gogetdoc
+
