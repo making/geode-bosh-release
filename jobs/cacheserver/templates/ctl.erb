@@ -1,8 +1,10 @@
 #! /bin/bash
 
 RUN_DIR=/var/vcap/data/cacheserver
-
 LOG_DIR=/var/vcap/sys/log/cacheserver
+JOB_DIR=/var/vcap/jobs/cacheserver/
+CONFIG_DIR=$JOB_DIR/config
+
 export JAVA_HOME=/var/vcap/packages/jdk8
 export GEODE_HOME=/var/vcap/packages/geode
 
@@ -15,7 +17,8 @@ case $1 in
     chown vcap:vcap ${RUN_DIR}
 
     chpst -u vcap:vcap gfsh start server --name=`hostname` \
-      --dir=${RUN_DIR}                                     \
+      --dir=${RUN_DIR} \
+      --properties-file=$CONFIG_DIR/gemfire.properties \
       --initial-heap=<%= p("cacheserver.initial_heap") %>  \
       --max-heap=<%= p("cacheserver.max_heap") %>          \
       --server-port=<%= p("cacheserver.server_port") %>    \
@@ -23,6 +26,6 @@ case $1 in
     ;;
 
   stop)
-    gfsh stop server --dir=${RUN_DIR}
+    killall java
     ;;
 esac

@@ -2,6 +2,7 @@
 name: cacheserver
 templates:
   ctl.erb: bin/ctl
+  gemfire.properties.erb: config/gemfire.properties
 
 packages:
 - jdk8
