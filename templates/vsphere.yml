@@ -1,0 +1,55 @@
+---
+
+director_uuid: f83141e2-32ac-43a1-9bdc-04f915dd95f2
+name: geode
+meta:
+  stemcell:
+    name: bosh-vsphere-esxi-ubuntu-trusty-go_agent
+    version: latest
+
+jobs:
+- name: geode-locator
+  instances: 2
+- name: geode-cacheserver
+  instances: 3
+
+resource_pools:
+- name: geode-locators
+  stemcell:
+    name: bosh-vsphere-esxi-ubuntu-trusty-go_agent
+    version: latest
+  cloud_properties:
+    ram: 2048
+    disk: 7128
+    cpu: 2
+- name: geode-cacheservers
+  stemcell:
+    name: bosh-vsphere-esxi-ubuntu-trusty-go_agent
+    version: latest
+  cloud_properties:
+    ram: 2048
+    disk: 7128
+    cpu: 2
+
+compilation:
+  workers: 2
+  cloud_properties:
+    ram: 8192
+    disk: 8096
+    cpu: 4
+  network: default
+  reuse_compilation_vms: true
+
+networks:
+- name: default
+  subnets:
+  - range: 10.193.56.0/24
+    gateway: 10.193.56.1
+    dns:
+    - 10.193.56.2
+    # static:
+    # - 10.193.56.247-10.193.56.249
+    # - 10.193.56.251-10.193.56.253
+    reserved: [10.193.56.0-10.193.56.246,10.193.56.250,10.193.56.254]
+    cloud_properties:
+      name : "VM Network"
